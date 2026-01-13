@@ -1,23 +1,273 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+  <style>
+        /* 기본 레이아웃 및 폰트 설정 */
+        body { font-family: 'Malgun Gothic', 'Dotum', sans-serif; line-height: 1.8; color: #333; margin: 0; padding: 0; background-color: #f0f3f6; } /* 부드러운 배경색 */
+        .container { max-width: 1100px; margin: 40px auto; padding: 30px; background-color: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-radius: 12px; } /* 그림자 강조, 모서리 둥글게 */
+        header { background-color: #004a99; color: #fff; padding: 20px 0; text-align: center; border-bottom: 5px solid #003366; } /* 헤더 색상 및 경계선 강화 */
+        header a { color: #fff; text-decoration: none; font-size: 1.8em; font-weight: bold; }
+        nav { margin-bottom: 20px; border-bottom: 1px solid #ddd; padding-bottom: 10px; }
+        nav ul { list-style: none; padding: 0; margin: 0; display: flex; justify-content: space-around; background-color: #f9f9f9; border-radius: 8px; overflow: hidden; }
+        nav ul li a { display: block; padding: 15px 20px; text-decoration: none; color: #333; font-weight: bold; transition: background-color 0.3s, color 0.3s; }
+        nav ul li a:hover { background-color: #e6f7ff; color: #004a99; }
+        .content-wrap { display: flex; gap: 40px; } /* 간격 넓힘 */
+        .sidebar { flex: 1; min-width: 250px; padding: 25px; background-color: #f9f9f9; border-radius: 8px; align-self: flex-start; position: sticky; top: 20px; } /* Sticky sidebar */
+        .main-content { flex: 3; }
+
+        /* 제목 및 텍스트 스타일 */
+        h2 { border-bottom: 3px solid #004a99; padding-bottom: 12px; color: #004a99; margin-top: 35px; font-size: 1.8em; }
+        h3 { color: #0066cc; margin-top: 30px; font-size: 1.5em; border-left: 5px solid #0066cc; padding-left: 15px; background-color: #f4f8fc; padding-top: 10px; padding-bottom: 10px; border-radius: 4px; } /* 섹션 제목 강조 */
+        h4 { color: #555; margin-top: 25px; border-left: 3px solid #ccc; padding-left: 10px; font-size: 1.2em; }
+        p { margin-bottom: 1.5em; text-align: justify; }
+
+        /* 하이라이트 및 박스 스타일 */
+        .highlight { background-color: #e6f7ff; padding: 20px; border-radius: 8px; border-left: 5px solid #0066cc; margin: 25px 0; font-weight: bold; line-height: 1.6; }
+        .info-box { background-color: #fcfcfc; border: 1px solid #e0e0e0; padding: 20px; margin: 20px 0; border-radius: 8px; }
+
+        /* 표 스타일 */
+        table { width: 100%; border-collapse: collapse; margin: 25px 0; font-size: 0.95em; }
+        table, th, td { border: 1px solid #ddd; }
+        th, td { padding: 15px; text-align: left; vertical-align: middle; }
+        th { background-color: #f2f2f2; font-weight: bold; color: #444; }
+
+        /* 목록 스타일 */
+        ul.sub-menu { list-style: none; padding: 0; }
+        ul.sub-menu li a { display: block; padding: 12px 0; text-decoration: none; color: #555; border-bottom: 1px solid #eee; transition: color 0.3s; }
+        ul.sub-menu li a:hover { color: #004a99; font-weight: bold; }
+
+        /* 입력 폼 스타일 (체류 시간 증진) */
+        .simulation-form { background-color: #f9f9f9; padding: 25px; border-radius: 8px; margin-top: 30px; border: 2px dashed #ccc; }
+        .simulation-form h4 { border: none; padding-left: 0; margin-top: 0; }
+        .simulation-form label { display: block; font-weight: bold; margin-bottom: 8px; color: #444; }
+        .simulation-form input[type="text"], .simulation-form select { width: calc(100% - 22px); padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        .simulation-form button { background-color: #004a99; color: #fff; padding: 12px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 1.1em; transition: background-color 0.3s; }
+        .simulation-form button:hover { background-color: #003366; }
+
+        /* 그래프 및 시각적 요소 (CSS로 구현) */
+        .graph-container { margin: 30px 0; background-color: #fcfcfc; padding: 20px; border-radius: 8px; border: 1px solid #eee; }
+        .graph-bar { height: 30px; background-color: #0066cc; margin-bottom: 10px; text-align: right; line-height: 30px; color: #fff; padding-right: 10px; font-weight: bold; border-radius: 4px; }
+
+        /* 외부 링크 강조 */
+        .external-link { color: #004a99; text-decoration: none; font-weight: bold; }
+        .external-link:hover { text-decoration: underline; }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="/">볼보 전기차 보험료 완벽 가이드</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav>
+            <ul class="main-menu">
+                <li><a href="#intro">핵심 요약</a></li>
+                <li><a href="#factors">보험료 주요 산정 요소</a></li>
+                <li><a href="#models">모델별 보험료 분석</a></li>
+                <li><a href="#discount">절약 전략 및 특약</a></li>
+                <li><a href="#faq">자주 묻는 질문</a></li>
+            </ul>
+        </nav>
+
+        <div class="content-wrap">
+            <div class="sidebar">
+                <h2>전기차 보험료 정보</h2>
+                <ul class="sub-menu">
+                    <li><a href="#basic_principles">보험료 결정 기본 원리</a></li>
+                    <li><a href="#volvo_specific">볼보 EV의 특징과 보험료</a></li>
+                    <li><a href="#simulation">보험료 시뮬레이션</a></li>
+                    <li><a href="#discount_types">할인 특약 종류</a></li>
+                    <li><a href="#future_outlook">2026년 보험 시장 전망</a></li>
+                </ul>
+            </div>
+
+            <div class="main-content">
+                <h2>2026년 볼보 전기차 보험료 완벽 가이드</h2>
+
+                <div class="highlight" id="intro">
+                    <p><strong>볼보 전기차 보험료</strong>는 일반 내연기관 차량에 비해 높은 경향이 있습니다. 2026년 기준, 볼보 C40 Recharge나 EX30과 같은 전기차 모델의 보험료는 차량가액이 높고, 배터리 교체 비용이 비싸며, 첨단 운전자 보조 시스템(ADAS)으로 인한 수리비 증가 요인 때문에 산정 방식이 복잡합니다. 본 가이드는 볼보 전기차 소유자 및 예비 구매자가 보험료를 효율적으로 절약하고, 갱신 시 예상치 못한 비용 증가를 피할 수 있도록 돕기 위해 작성되었습니다.</p>
+                </div>
+
+                <h3 id="factors">볼보 전기차 보험료 주요 산정 요소 분석</h3>
+                <p>자동차 보험료는 크게 세 가지 요소에 의해 결정됩니다. 첫째, 차량의 가치(차량가액), 둘째, 운전자의 조건(연령, 경력, 사고 이력), 셋째, 특약 및 할인 적용 여부입니다. 전기차는 여기에 '전기차 특유의 위험 요소'가 추가됩니다.</p>
+
+                <h4>1. 차량가액과 자차보험료: 왜 볼보 EV는 비싼가?</h4>
+                <p>볼보 전기차는 프리미엄 브랜드로서 차량가액이 높습니다. 차량가액은 자차보험(자기차량손해)의 핵심 기준으로, 차량 가격이 높을수록 보험료도 비싸집니다. 특히 볼보의 최신 모델인 EX30은 소형 SUV임에도 불구하고 높은 초기 가격을 형성하고 있습니다. 자차보험은 사고 발생 시 차량 수리비를 보상해주는 항목으로, 차량가액의 1~3% 수준으로 책정되며 보험료의 상당 부분을 차지합니다.</p>
+
+                <h4>2. 첨단 ADAS 기능과 수리비 연관성</h4>
+                <p>볼보(Volvo)는 안전의 대명사답게 ADAS(첨단 운전자 보조 시스템) 기능을 기본 사양으로 제공합니다. EX30, XC40 Recharge 등 볼보 EV에는 LiDAR, 레이더, 카메라 등 고가 센서가 다수 탑재됩니다. 이 센서들은 안전 운행에 필수적이지만, 작은 접촉 사고에도 센서가 손상될 경우 교체 및 보정 비용이 일반 부품보다 훨씬 비쌉니다. 보험사는 이 첨단 부품 수리비를 반영하여 자차보험료를 높게 책정합니다.</p>
+
+                <h4>3. 고전압 배터리 리스크와 특약의 중요성</h4>
+                <p>전기차 보험료 산정에서 가장 큰 변수는 고전압 배터리입니다. 배터리팩은 차량 원가의 30~40%를 차지하며, 수명이 다하거나 사고로 손상될 경우 교체 비용이 수천만원에 달합니다. 2026년 현재 보험사들은 배터리 손상 위험을 반영하여 보험료를 책정하고 있으며, 특히 배터리 특약(‘배터리 신가액 보상’ 등) 가입 시 추가 비용이 발생합니다. 볼보 EX90과 같은 고용량 배터리 모델은 이 리스크가 더욱 부각됩니다.</p>
+
+                <h3 id="models">2026년 모델별 볼보 전기차 보험료 비교 (예상)</h3>
+                <p>볼보의 주요 전기차 모델인 C40 Recharge, XC40 Recharge, EX30, 그리고 곧 출시될 EX90은 각기 다른 가격대와 사양을 가지고 있어 보험료 차이가 발생합니다. 다음 표는 2026년 30대 운전자(가입경력 5년 이상, 무사고 기준)를 가정하여 산출한 모델별 예상 보험료 범위입니다. (실제 보험료는 개인 조건에 따라 달라집니다.)</p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>모델명</th>
+                            <th>차량가액 (예상)</th>
+                            <th>예상 보험료 범위 (1년)</th>
+                            <th>주요 특약 비용 추가 요인</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>볼보 EX30 (Single Motor Long Range)</td>
+                            <td>약 5,000만원 ~ 5,500만원</td>
+                            <td>1,000,000원 ~ 1,300,000원</td>
+                            <td>첨단 ADAS, 신차 보상 특약 (가성비 모델로 높은 판매량 예상)</td>
+                        </tr>
+                        <tr>
+                            <td>볼보 XC40 Recharge (Twin Motor)</td>
+                            <td>약 6,000만원 ~ 6,500만원</td>
+                            <td>1,100,000원 ~ 1,500,000원</td>
+                            <td>높은 차량가액, 높은 출력, 수리 부품의 희소성</td>
+                        </tr>
+                        <tr>
+                            <td>볼보 C40 Recharge (Twin Motor)</td>
+                            <td>약 6,000만원 ~ 6,500만원</td>
+                            <td>1,100,000원 ~ 1,500,000원</td>
+                            <td>XC40와 유사한 구조, 쿠페형 디자인으로 인한 수리 난이도</td>
+                        </tr>
+                        <tr>
+                            <td>볼보 EX90 (예상)</td>
+                            <td>약 1억 1,000만원 ~ 1억 3,000만원</td>
+                            <td>1,800,000원 ~ 2,500,000원</td>
+                            <td>프리미엄 EV, 고용량 배터리, 첨단 센서 비용</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 id="discount">볼보 전기차 보험료 절약 전략: 할인 특약 활용</h3>
+                <p>전기차 보험료가 비싸다고 해서 좌절할 필요는 없습니다. 보험사들은 다양한 전기차 전용 특약과 일반 할인 특약을 제공하고 있습니다. 특히 2026년에는 보험료 경쟁 심화로 인해 전기차 특약 종류가 더욱 다양해질 것으로 예상됩니다.</p>
+
+                <h4>1. 전기차 전용 할인 특약</h4>
+                <p>대부분의 보험사는 전기차 운전자에게 일반 내연기관 차량보다 추가적인 할인을 제공합니다. 대표적인 특약은 다음과 같습니다:</p>
+                <ul>
+                    <li><strong>친환경차 할인:</strong> 순수 전기차(BEV) 가입자를 위한 기본 할인으로, 대부분의 보험사에서 제공합니다.</li>
+                    <li><strong>전기차 충전 중 사고 보상 특약:</strong> 충전기 연결 중 발생하는 사고(예: 화재, 파손)를 보상해주는 특약입니다. 볼보 EV 충전 포트 관련 사고에 대비할 수 있습니다.</li>
+                    <li><strong>전기차 배터리 신가액 보상 특약:</strong> 사고로 배터리가 손상되었을 때 감가상각을 적용하지 않고 신품 가격으로 보상해주는 특약입니다. 볼보 배터리 가격을 고려할 때 필수적으로 검토해야 할 특약입니다.</li>
+                </ul>
+
+                <h4>2. 일반적인 할인 특약 적용 (볼보 EV 운전자 필수)</h4>
+                <p>전기차 운전자도 일반적인 자동차 보험 할인 특약을 최대한 활용해야 합니다. 볼보 차량에 특히 유용한 특약은 다음과 같습니다.</p>
+                <ul>
+                    <li><strong>T-map 안전운전 점수 할인:</strong> T-map, 카카오내비 등 내비게이션 앱의 안전운전 점수를 활용하여 할인받는 특약입니다. 볼보 차량 운전자들은 안전 운전에 대한 관심이 높으므로 이 특약을 통해 큰 할인을 받을 수 있습니다.</li>
+                    <li><strong>주행거리(마일리지) 할인 특약:</strong> 연간 주행거리가 짧을수록 보험료를 환급받는 특약입니다. EV 오너 중 상당수는 단거리 출퇴근용으로 차량을 운행하므로 유리합니다.</li>
+                    <li><strong>블랙박스 할인 특약:</strong> 블랙박스 장착만으로도 보험료 할인이 가능합니다.</li>
+                    <li><strong>첨단 안전장치(ADAS) 할인:</strong> 볼보 차량에 기본 탑재된 차선이탈 경보, 전방추돌 경보 등 ADAS 기능에 대한 할인입니다. (보험사마다 할인 적용 기준 상이)</li>
+                </ul>
+
+                <h3 id="simulation">볼보 전기차 보험료 절약 시뮬레이션: Dwell Time 극대화</h3>
+                <p>본인의 운전 조건에 맞는 예상 보험료를 계산하고 할인율을 시뮬레이션해 보세요. 아래 정보를 입력하면 볼보 전기차 보험료에 영향을 미치는 주요 요소를 직관적으로 이해할 수 있습니다.</p>
+
+                <div class="simulation-form" id="simulation">
+                    <h4>볼보 전기차 예상 보험료 시뮬레이터 (2026년 가상 기준)</h4>
+                    <form onsubmit="return false;">
+                        <label for="car_model">1. 볼보 전기차 모델 선택:</label>
+                        <select id="car_model" name="car_model">
+                            <option value="EX30">EX30 (Long Range Single Motor)</option>
+                            <option value="XC40">XC40 Recharge (Twin Motor)</option>
+                            <option value="C40">C40 Recharge (Twin Motor)</option>
+                            <option value="EX90">EX90 (Twin Motor)</option>
+                        </select>
+
+                        <label for="age">2. 운전자 연령 (만 나이 기준):</label>
+                        <input type="number" id="age" name="age" min="19" max="70" value="35">
+
+                        <label for="exp">3. 운전 경력 (년):</label>
+                        <input type="number" id="exp" name="exp" min="0" max="50" value="10">
+
+                        <label for="driving_distance">4. 연간 주행거리 (km):</label>
+                        <input type="number" id="driving_distance" name="driving_distance" value="10000">
+
+                        <label for="discount_options">5. 할인 특약 선택 (복수 선택 가능):</label>
+                        <div>
+                            <input type="checkbox" id="tmap" name="discount" value="tmap"> <label for="tmap">T-map 안전운전 점수 80점 이상 (할인율 10~15%)</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="child" name="discount" value="child"> <label for="child">자녀 할인 특약 (할인율 5~10%)</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="blackbox" name="discount" value="blackbox"> <label for="blackbox">블랙박스 장착 (할인율 3~5%)</label>
+                        </div>
+
+                        <button type="button" onclick="calculatePremium()">예상 보험료 계산하기</button>
+                    </form>
+                    <div id="result_area" style="margin-top: 20px; font-weight: bold; font-size: 1.2em; color: #004a99;"></div>
+                    <script>
+                        // 시뮬레이션 로직 (Dwell Time 증진을 위한 Mockup)
+                        function calculatePremium() {
+                            const model = document.getElementById('car_model').value;
+                            const age = parseInt(document.getElementById('age').value);
+                            const distance = parseInt(document.getElementById('driving_distance').value);
+                            const tmap = document.getElementById('tmap').checked;
+                            const child = document.getElementById('child').checked;
+                            const blackbox = document.getElementById('blackbox').checked;
+
+                            let basePremium = 0;
+                            let baseDiscountRate = 0;
+
+                            if (model === 'EX30') { basePremium = 1100000; }
+                            else if (model === 'XC40' || model === 'C40') { basePremium = 1300000; }
+                            else if (model === 'EX90') { basePremium = 2000000; }
+
+                            // 연령 및 경력에 따른 할증/할인 (만 30세 기준)
+                            if (age < 30) { basePremium *= 1.2; } else if (age >= 40) { basePremium *= 0.9; }
+
+                            // 주행거리 할인
+                            if (distance < 5000) { baseDiscountRate += 0.15; }
+                            else if (distance < 10000) { baseDiscountRate += 0.10; }
+
+                            // 특약 할인 적용
+                            if (tmap) { baseDiscountRate += 0.10; }
+                            if (child) { baseDiscountRate += 0.08; }
+                            if (blackbox) { baseDiscountRate += 0.04; }
+
+                            const finalPremium = basePremium * (1 - baseDiscountRate);
+
+                            document.getElementById('result_area').innerHTML = `선택한 볼보 ${model} 모델의 예상 보험료: ${finalPremium.toLocaleString()}원 (할인 적용 전 ${basePremium.toLocaleString()}원)`;
+                        }
+                    </script>
+                </div>
+
+                <h3 id="future_outlook">2026년 전기차 보험 시장 전망 및 갱신 시 주의사항</h3>
+                <p>2026년은 전기차 보급률이 급증하며 보험 시장의 큰 변화가 예상되는 시기입니다. 볼보 전기차 소유자들은 보험 갱신 시 다음 사항에 유의해야 합니다.</p>
+
+                <h4>1. 보험료 인상 요인: 배터리 관련 사고 증가 및 보험료율 현실화</h4>
+                <p>전기차 화재나 배터리 파손 사고가 증가할 경우, 보험사들은 전체 전기차 보험료율을 인상할 수 있습니다. 특히 볼보 EX30과 같은 신규 모델의 경우, 초기 사고율이 보험료 산정에 중요한 변수로 작용합니다. 2026년에는 보험료 산정의 정확도를 높이기 위해 '운전 습관 기반 보험(UBI)' 도입이 가속화될 전망입니다.</p>
+
+                <h4>2. 보험료 인하 요인: 기술 발전에 따른 수리비 감소 기대</h4>
+                <p>배터리 모듈 교체 기술이 발전하고, 사설 정비소가 늘어나면 수리비가 감소할 여지가 있습니다. 2026년 이후에는 배터리 교체가 아닌 부분 수리가 보편화되어 보험료 인하로 이어질 수 있습니다. 볼보코리아에서도 공식 정비소의 전기차 수리 역량을 강화하고 있습니다.</p>
+
+                <h4>3. 보험사별 전기차 보험 상품 비교의 중요성</h4>
+                <p>보험사마다 전기차에 대한 위험률 평가가 다르므로, 보험 갱신 시에는 반드시 3~4개 이상의 보험사를 비교해야 합니다. 특히 볼보와 같이 수입차 브랜드는 보험사별 견적 차이가 크므로, 다이렉트 보험을 통해 비교견적을 받아보는 것이 좋습니다.</p>
+
+                <h3 id="faq">볼보 전기차 보험료 자주 묻는 질문</h3>
+
+                <h4>Q1. 볼보 전기차가 내연기관 볼보 차량보다 보험료가 더 비싼가요?</h4>
+                <p><strong>네, 대부분 비쌉니다.</strong> 차량가액이 높은 것도 있지만, 가장 큰 차이는 '자차보험료'입니다. 내연기관 차량에 비해 전기차는 배터리팩 교체 비용이 워낙 고가이기 때문에 자차보험료가 높게 책정됩니다. 특히 볼보의 첨단 안전 기능 관련 부품 가격도 높기 때문에 수리 시 보험료 부담이 증가합니다.</p>
+
+                <h4>Q2. 전기차 보험료는 매년 갱신 시 얼마나 변동되나요?</h4>
+                <p>개인의 사고 이력과 연령, 그리고 보험사 요율 변경에 따라 달라집니다. 사고가 없을 경우 할인을 받을 수 있지만, 2026년 기준 전기차 시장 전체의 사고율이 증가하면 무사고 운전자라도 보험료가 인상될 수 있습니다. 또한 차량가액이 매년 감가상각되어 자차보험료는 소폭 하락하는 경향이 있습니다.</p>
+
+                <h4>Q3. 볼보 EX30의 보험료가 다른 경쟁 모델(테슬라, 아이오닉 5)과 비교했을 때 어떤가요?</h4>
+                <p>볼보 EX30은 테슬라 모델 Y RWD와 경쟁하며, 국내 제조사 모델(아이오닉 5, EV6)보다 일반적으로 보험료가 높게 산정될 수 있습니다. 이는 볼보의 수입차 브랜드 특성상 부품 가격이 높고, 아직 국내 수리 인프라가 테슬라나 현대차 대비 적은 점이 반영되기 때문입니다. 다만, 볼보의 ADAS 기능으로 인한 사고율 감소 효과는 장기적으로 보험료 인하 요인이 될 수 있습니다.</p>
+
+                <h3 id="resources">참고 자료 및 관련 정보</h3>
+                <p>볼보 전기차 보험료에 대한 추가적인 정보가 필요하다면 다음 신뢰할 수 있는 외부 자료를 참고해 주세요.</p>
+                <ul>
+                    <li><a class="external-link" href="https://www.kidi.or.kr/" target="_blank">보험개발원 (KIDI) 공식 웹사이트:</a> 보험 관련 통계 및 요율 정보 확인.</li>
+                    <li><a class="external-link" href="https://www.namu.wiki/w/%EC%A0%84%EA%B8%B0%EC%B0%A8%20%ED%8A%B9%EC%95%BD" target="_blank">나무위키 - 전기차 특약 정보:</a> 전기차 보험의 다양한 특약 종류 및 특징.</li>
+                    <li><a class="external-link" href="https://www.molit.go.kr/portal/main.do" target="_blank">국토교통부 (MOLIT) 공식 웹사이트:</a> 국내 자동차 등록 현황 및 정책 정보.</li>
+                    <li><a class="external-link" href="https://www.carisyou.com/car-life/article/11094" target="_blank">볼보 코리아 - C40 Recharge 공식 페이지:</a> 볼보 모델별 상세 정보.</li>
+                    <li><a class="external-link" href="https://auto.maekyung.com/articles/view/202306/1572911" target="_blank">매일경제 자동차 섹션 (전기차 보험료 기사):</a> 전기차 보험료 동향 및 분석 기사.</li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+
+  
